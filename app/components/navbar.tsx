@@ -8,7 +8,7 @@ import Link from "next/link";
 export const Navbar = () => {
   return (
 
-    <NextNavbar className='bg-[#010101] text-white' isBlurred>
+    <NextNavbar className='bg-transparent text-white' isBlurred>
       <NavbarBrand>
         <Image src="/assets/images/logo.svg" width={60} height={60} alt='Xervsware' />
       </NavbarBrand>

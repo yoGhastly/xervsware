@@ -7,6 +7,8 @@ import {
   Button,
 } from "@nextui-org/react";
 import clsx from "clsx";
+import Image from "next/image";
+import ScrollReveal from "./components/reusable/scroll-reveal";
 
 export default function Home() {
   return (
@@ -20,7 +22,7 @@ export default function Home() {
         className="flex flex-col gap-10 justify-center items-center max-w-3xl"
         style={{ margin: "0 auto" }}
       >
-        <h1 className="font-extrabold text-white text-[clamp(46px,11vw,80px)] text-center leading-normal mt-[65px]">
+        <h1 className="font-extrabold text-white text-[clamp(46px,11vw,80px)] text-center leading-normal">
           You bring the idea, we do the{" "}
           <span className="relative h-14">
             <MagicStar />
@@ -53,7 +55,7 @@ export default function Home() {
           </span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
+        <div className="grid md:auto-rows-fr grid-cols-1 md:grid-cols-2 gap-8 text-white">
           <div className="flex flex-col justify-center items-center border border-[#38363E] rounded p-5">
             <h3 className={clsx(styles.number, "text-[clamp(46px,11vw,80px)]")}>
               +10,000
@@ -79,6 +81,9 @@ export default function Home() {
               realm.
             </p>
           </div>
+          <ScrollReveal className="relative border border-[#38363E] rounded h-36 md:h-64 md:col-span-2">
+            <Image src="/assets/images/tools.svg" fill className="md:object-cover" alt="Tools" />
+          </ScrollReveal>
         </div>
       </section>
       <Footer />
