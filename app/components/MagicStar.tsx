@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import styles from '../styles/Header.module.css'; // Adjust the path to your CSS file
+import React, { useEffect, useRef } from "react";
+import styles from "../styles/Header.module.css"; // Adjust the path to your CSS file
 
 export const MagicStar = () => {
   const magicStarRef = useRef<HTMLSpanElement>(null);
@@ -17,7 +17,9 @@ export const MagicStar = () => {
   };
 
   useEffect(() => {
-    const magicStarElements = Array.from(document.getElementsByClassName(styles.magic_star)) as HTMLElement[];
+    const magicStarElements = Array.from(
+      document.getElementsByClassName(styles.magic_star)
+    ) as HTMLElement[];
 
     let index = 0;
     const interval = 1800;
@@ -45,4 +47,3 @@ export const MagicStar = () => {
     </span>
   );
 };
-

@@ -1,20 +1,19 @@
-'use client';
-import React, { useLayoutEffect, useRef } from 'react';
-import { useMediaQuery } from '../hooks/useMediaQuery';
-import Image from 'next/image';
+"use client";
+import React, { useLayoutEffect, useRef } from "react";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 import localFont from "next/font/local";
-import { useIsomorphicLayoutEffect } from '../hooks/useIsoMorphicLayoutEffect';
-import TextReveal from './reusable/text-reveal';
-import ScrollReveal from './reusable/scroll-reveal';
-import { Navbar } from '.';
-// Font files can be colocated inside of `pages`
+import { useIsomorphicLayoutEffect } from "../hooks/useIsoMorphicLayoutEffect";
+import ScrollReveal from "./reusable/scroll-reveal";
+import { Badge, Chip } from "@nextui-org/react";
+
 const stardom = localFont({
   src: "../../public/assets/fonts/Stardom-Regular.otf",
 });
@@ -25,7 +24,6 @@ export const ShowCaseDesktop = () => {
   const rightCampanario = useRef(null);
   const leftGeits = useRef(null);
   const rightGeits = useRef(null);
-
 
   useIsomorphicLayoutEffect(() => {
     const leftCampanarioElement = leftCampanario.current;
@@ -84,7 +82,6 @@ export const ShowCaseDesktop = () => {
   }, [isSm]);
   return (
     <React.Fragment>
-
       <article className="flex justify-center items-center gap-8">
         <figure
           ref={leftCampanario}
@@ -179,17 +176,13 @@ export const ShowCaseDesktop = () => {
         </figure>
       </article>
     </React.Fragment>
-  )
-}
-
+  );
+};
 
 export const ShowCaseMobile = () => {
-
-
   return (
     <React.Fragment>
       <ScrollReveal>
-
         <article className="flex justify-center items-center gap-8">
           <div className="flex flex-col justify-between items-center gap-10">
             <div className="w-full flex justify-center items-center gap-5">
@@ -205,21 +198,37 @@ export const ShowCaseMobile = () => {
             <h2
               className={clsx(
                 stardom.className,
-                'text-[clamp(46px,11vw,50px)] text-center'
+                "text-[clamp(46px,11vw,50px)] text-center"
               )}
             >
               Campanario Eventos.
             </h2>
 
+            <Chip
+              variant="flat"
+              color="warning"
+              as="a"
+              href="https://instagram.com/xervsware"
+              target="_blank"
+            >
+              Site
+            </Chip>
+            <figure className="relative bg-purple-200 w-[80vw] h-[100vw] rounded-xl">
+              <Image
+                src="/assets/images/campanario-left.png"
+                fill
+                alt="Campanario"
+                className="object-cover rounded-3xl pointer-events-none"
+              />
+            </figure>
             <hr className="w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#eeb86d] to-[#9946b2] border-none" />
           </div>
         </article>
       </ScrollReveal>
 
       <ScrollReveal>
-
         <article className="flex justify-center items-center gap-8 mt-56">
-          <div className="flex flex-col justify-between items-center gap-10 min-h-[500px]">
+          <div className="flex flex-col justify-between items-center gap-10">
             <div className="flex justify-center items-center gap-5">
               <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
                 Jan 2023
@@ -233,12 +242,29 @@ export const ShowCaseMobile = () => {
             <h2
               className={clsx(
                 stardom.className,
-                'text-[clamp(46px,11vw,50px)] text-center max-w-xs'
+                "text-[clamp(46px,11vw,50px)] text-center max-w-xs"
               )}
             >
               GEITS UI/UX and development.
             </h2>
+            <Chip
+              variant="flat"
+              color="success"
+              as="a"
+              href="https://geits.tech"
+              target="_blank"
+            >
+              Site
+            </Chip>
 
+            <figure className="relative bg-purple-200 w-[80vw] h-[100vw] rounded-xl">
+              <Image
+                src="/assets/images/geits-left.png"
+                fill
+                alt="Campanario"
+                className="object-cover rounded-3xl pointer-events-none"
+              />
+            </figure>
             <hr className="w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#7ef29d] to-[#0f68a9] border-none" />
           </div>
         </article>

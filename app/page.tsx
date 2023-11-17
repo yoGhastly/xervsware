@@ -3,9 +3,7 @@ import React from "react";
 import { Footer, MagicStar, Navbar } from "./components";
 
 import styles from "./styles/Header.module.css";
-import {
-  Button,
-} from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import clsx from "clsx";
 import Image from "next/image";
 import ScrollReveal from "./components/reusable/scroll-reveal";
@@ -33,11 +31,18 @@ export default function Home() {
         </h1>
         <p className="text-[#9A9B9D] text-center max-w-2xl text-[clamp(16px,2vw,20px)]">
           With a commitment to excellence and a touch of magic, Xervsware
-          transforms your concepts into powerful, user-friendly software
-          applications.
+          transforms your concepts into powerful, user-friendly{" "}
+          <span className="text-purple-200 underline">
+            <Link href="/showcase">software applications.</Link>
+          </span>
         </p>
-
-        <Button variant="solid" color="default">
+        <Button
+          variant="solid"
+          color="default"
+          as="a"
+          href="https://cal.com/xervsware"
+          target="_blank"
+        >
           Get Started
         </Button>
       </header>
@@ -71,7 +76,7 @@ export default function Home() {
                 "md:text-[clamp(46px,11vw,30px)]",
                 "text-[clamp(36px,11vw,30px)]",
                 styles.gradient,
-                "font-bold",
+                "font-bold"
               )}
             >
               Custom Software development
@@ -84,7 +89,12 @@ export default function Home() {
             </p>
           </div>
           <ScrollReveal className="relative border border-[#38363E] rounded h-36 md:h-64 md:col-span-2">
-            <Image src="/assets/images/tools.svg" fill className="md:object-cover" alt="Tools" />
+            <Image
+              src="/assets/images/tools.svg"
+              fill
+              className="md:object-cover"
+              alt="Tools"
+            />
           </ScrollReveal>
         </div>
 
@@ -92,19 +102,23 @@ export default function Home() {
           <h4
             className={clsx(
               "md:text-[clamp(46px,11vw,30px)]",
-              "text-[clamp(36px,11vw,30px)]",
+              "text-[clamp(26px,11vw,20px)]",
               styles.gradient,
-              "font-bold",
+              "font-bold"
             )}
-          >Get In Touch</h4>
+          >
+            Get In Touch
+          </h4>
           <HoverGradient>
             <p
               className={clsx(
                 "md:text-[clamp(36px,11vw,30px)]",
-                "text-[clamp(26px,11vw,30px)]",
+                "text-[clamp(26px,11vw,20px)]",
                 "font-bold"
               )}
-            >xervsware@outlook.com</p>
+            >
+              xervsware@outlook.com
+            </p>
           </HoverGradient>
 
           <HoverGradient className="text-white">
@@ -113,10 +127,12 @@ export default function Home() {
               target="_blank"
               className={clsx(
                 "md:text-[clamp(36px,11vw,30px)]",
-                "text-[clamp(26px,11vw,30px)]",
+                "text-[clamp(26px,11vw,20px)]",
                 "font-bold"
               )}
-            >@xervsware</Link>
+            >
+              @xervsware
+            </Link>
           </HoverGradient>
         </div>
       </section>

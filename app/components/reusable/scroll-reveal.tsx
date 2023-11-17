@@ -1,7 +1,6 @@
 import React, { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ClassValue } from "clsx";
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -9,7 +8,11 @@ interface ScrollRevealProps {
   style?: CSSProperties;
 }
 
-const ScrollReveal: React.FC<ScrollRevealProps> = ({ children, className, style }) => {
+const ScrollReveal: React.FC<ScrollRevealProps> = ({
+  children,
+  className,
+  style,
+}) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     rootMargin: "-100px 0px",
