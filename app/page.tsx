@@ -1,16 +1,36 @@
 "use client";
-import React from "react";
-import { Footer, MagicStar, Navbar } from "./components";
+import React, { useState } from "react";
+import { Footer, MagicStar, Navbar, OurTeam } from "./components";
 
 import styles from "./styles/Header.module.css";
-import { Button } from "@nextui-org/react";
+import {
+  Button,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@nextui-org/react";
 import clsx from "clsx";
 import Image from "next/image";
 import ScrollReveal from "./components/reusable/scroll-reveal";
 import HoverGradient from "./components/reusable/hover-gradient";
 import Link from "next/link";
+import { useCopyToClipboard } from "usehooks-ts";
 
 export default function Home() {
+  const [value, copy] = useCopyToClipboard();
+  const [copied, setIsCopied] = useState(false);
+
+  const copyToClipboard = () => {
+    copy("info@xervsware.com");
+    setIsCopied(true);
+
+    const timeout = setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  };
+
   return (
     <main
       className="min-h-screen flex flex-col gap-10"
@@ -76,7 +96,7 @@ export default function Home() {
                 "md:text-[clamp(46px,11vw,30px)]",
                 "text-[clamp(36px,11vw,30px)]",
                 styles.gradient,
-                "font-bold"
+                "font-bold",
               )}
             >
               Custom Software development
@@ -98,41 +118,38 @@ export default function Home() {
           </ScrollReveal>
         </div>
 
+        <ScrollReveal>
+          <OurTeam />
+        </ScrollReveal>
+
         <div className="flex flex-col p-3 gap-10">
           <h4
             className={clsx(
               "md:text-[clamp(46px,11vw,30px)]",
               "text-[clamp(26px,11vw,20px)]",
               styles.gradient,
-              "font-bold"
+              "font-bold",
             )}
           >
             Get In Touch
           </h4>
-          <HoverGradient>
-            <p
-              className={clsx(
-                "md:text-[clamp(36px,11vw,30px)]",
-                "text-[clamp(26px,11vw,20px)]",
-                "font-bold"
-              )}
-            >
-              xervsware@outlook.com
-            </p>
-          </HoverGradient>
-
-          <HoverGradient className="text-white">
-            <Link
-              href="https://www.instagram.com/xervsware"
-              target="_blank"
-              className={clsx(
-                "md:text-[clamp(36px,11vw,30px)]",
-                "text-[clamp(26px,11vw,20px)]",
-                "font-bold"
-              )}
-            >
-              @xervsware
-            </Link>
+          <HoverGradient className="cursor-pointer">
+            <Popover placement="bottom" color="success" isOpen={copied}>
+              <PopoverTrigger onClick={copyToClipboard}>
+                <p
+                  className={clsx(
+                    "md:text-[clamp(36px,11vw,30px)]",
+                    "text-[clamp(26px,11vw,20px)]",
+                    "font-bold",
+                  )}
+                >
+                  info@xervsware.com
+                </p>
+              </PopoverTrigger>
+              <PopoverContent>
+                <p>Copied to Clipboard</p>
+              </PopoverContent>
+            </Popover>
           </HoverGradient>
         </div>
       </section>

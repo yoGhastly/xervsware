@@ -1,5 +1,5 @@
 "use client";
-import React, { useLayoutEffect, useRef } from "react";
+import React, { LegacyRef, createRef, useLayoutEffect, useRef } from "react";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import Image from "next/image";
 import { gsap } from "gsap";
@@ -12,169 +12,142 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 import localFont from "next/font/local";
 import { useIsomorphicLayoutEffect } from "../hooks/useIsoMorphicLayoutEffect";
 import ScrollReveal from "./reusable/scroll-reveal";
-import { Badge, Chip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/react";
+import Link from "next/link";
 
 const stardom = localFont({
   src: "../../public/assets/fonts/Stardom-Regular.otf",
 });
 
+const projects = [
+  {
+    date: "dec 2023",
+    subHeader: "Ad Astra",
+    name: "Ad Astra app",
+    href: "https://expo.dev/@ghastly/ad-astra",
+    src: "/assets/images/adastra-right.png",
+    srcLeft: "/assets/images/adastra-left.png",
+    color: "secondary",
+    gradient:
+      "w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#9946b2] to-[#e0e0e0] border-none",
+  },
+  {
+    date: "jan 2023",
+    subHeader: "GEITS",
+    name: "GEITS UI/UX and development.",
+    href: "https://geits.tech",
+    src: "/assets/images/geits-right.png",
+    srcLeft: "/assets/images/geits-left.png",
+    color: "success",
+    gradient:
+      "w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#7ef29d] to-[#0f68a9] border-none",
+  },
+  {
+    date: "dec 2022",
+    subHeader: "Campanario Eventos",
+    name: "Campanario Eventos.",
+    src: "/assets/images/campanario-right.png",
+    srcLeft: "/assets/images/campanario-left.png",
+    href: "#",
+    color: "warning",
+    gradient:
+      "w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#eeb86d] to-[#9946b2] border-none",
+  },
+];
+
 export const ShowCaseDesktop = () => {
   const isSm = useMediaQuery(480);
-  const leftCampanario = useRef(null);
-  const rightCampanario = useRef(null);
-  const leftGeits = useRef(null);
-  const rightGeits = useRef(null);
+
+  const projectRefs = useRef(
+    projects.map(() => ({ left: createRef(), right: createRef() })),
+  );
 
   useIsomorphicLayoutEffect(() => {
-    const leftCampanarioElement = leftCampanario.current;
-    const rightCampanarioRight = rightCampanario.current;
+    projectRefs.current.forEach(({ left, right }, index) => {
+      const leftElement = left.current;
+      const rightElement = right.current;
 
-    const leftGeitsElement = leftGeits.current;
-    const rightGeitsElement = rightGeits.current;
+      gsap.to(leftElement as gsap.TweenTarget, {
+        x: -400,
+        duration: 1,
+        zIndex: 999,
+        position: "relative",
+        rotate: -5,
+        scrollTrigger: {
+          trigger: leftElement as gsap.DOMTarget,
+          scrub: 2,
+        },
+      });
 
-    gsap.to(leftCampanarioElement, {
-      x: -400,
-      duration: 1,
-      zIndex: 999,
-      position: "relative",
-      rotate: -5,
-      scrollTrigger: {
-        trigger: leftCampanarioElement,
-        scrub: 2,
-      },
-    });
-
-    gsap.to(rightCampanarioRight, {
-      x: 400,
-      duration: 1,
-      zIndex: 999,
-      position: "relative",
-      rotate: 5,
-      scrollTrigger: {
-        trigger: rightCampanarioRight,
-        scrub: 2,
-      },
-    });
-
-    gsap.to(leftGeitsElement, {
-      x: -400,
-      duration: 1,
-      zIndex: 999,
-      position: "relative",
-      rotate: -5,
-      scrollTrigger: {
-        trigger: leftGeitsElement,
-        scrub: 2,
-      },
-    });
-
-    gsap.to(rightGeitsElement, {
-      x: 400,
-      duration: 1,
-      zIndex: 999,
-      position: "relative",
-      rotate: 5,
-      scrollTrigger: {
-        trigger: rightGeitsElement,
-        scrub: 2,
-      },
+      gsap.to(rightElement as gsap.TweenTarget, {
+        x: 400,
+        duration: 1,
+        zIndex: 999,
+        position: "relative",
+        rotate: 5,
+        scrollTrigger: {
+          trigger: rightElement as gsap.DOMTarget,
+          scrub: 2,
+        },
+      });
     });
   }, [isSm]);
+
   return (
     <React.Fragment>
-      <article className="flex justify-center items-center gap-8">
-        <figure
-          ref={leftCampanario}
-          className="bg-purple-200 w-[80vw] h-[100vw] md:w-[50vw] max-w-xs md:max-w-2xl md:h-[45vw] rounded-3xl"
+      {projects.map((project, index) => (
+        <article
+          className="flex justify-center items-center gap-8"
+          key={project.name}
         >
-          <Image
-            src="/assets/images/campanario-left.png"
-            fill
-            alt="Campanario"
-            className="object-cover rounded-3xl pointer-events-none"
-          />
-        </figure>
-        <div className="flex flex-col justify-between items-center gap-10 z-0 absolute min-h-[500px]">
-          <div className="flex justify-center items-center gap-5">
-            <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-              dec 2022
-            </p>
-            <p>&ndash;</p>
-            <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-              El Campanario Eventos.
-            </p>
-          </div>
-
-          <h2
-            className={clsx(
-              stardom.className,
-              "text-[clamp(46px,11vw,50px)] text-center"
-            )}
+          <figure
+            ref={projectRefs.current[index].left as LegacyRef<HTMLElement>}
+            className="bg-purple-200 w-[80vw] h-[100vw] md:w-[50vw] max-w-xs md:max-w-2xl md:h-[45vw] rounded-3xl"
           >
-            Campanario Eventos.
-          </h2>
+            <Image
+              src={project.srcLeft}
+              fill
+              alt={project.name}
+              className="object-cover rounded-3xl pointer-events-none"
+            />
+          </figure>
+          <div className="flex flex-col justify-between items-center gap-10 z-0 absolute min-h-[500px]">
+            <div className="flex justify-center items-center gap-5">
+              <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
+                {project.date}
+              </p>
+              <p>&ndash;</p>
+              <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
+                {project.name}
+              </p>
+            </div>
 
-          <hr className="w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#eeb86d] to-[#9946b2] border-none" />
-        </div>
-        <figure
-          ref={rightCampanario}
-          className="bg-pink-200 w-[80vw] h-[100vw] md:w-[50vw] md:max-w-2xl md:h-[45vw] rounded-3xl"
-        >
-          <Image
-            src="/assets/images/campanario-right.png"
-            fill
-            alt="Campanario"
-            className="object-cover rounded-3xl pointer-events-none"
-          />
-        </figure>
-      </article>
+            <Link
+              href={project.href}
+              target="_blank"
+              className={clsx(
+                stardom.className,
+                "text-[clamp(46px,11vw,50px)] text-center",
+              )}
+            >
+              {project.name}
+            </Link>
 
-      <article className="flex justify-center items-center gap-8 mt-56">
-        <figure
-          ref={leftGeits}
-          className="bg-purple-200 w-[80vw] h-[100vw] md:w-[50vw] md:max-w-2xl md:h-[45vw] rounded-3xl"
-        >
-          <Image
-            src="/assets/images/geits-left.png"
-            fill
-            alt="Campanario"
-            className="object-cover rounded-3xl pointer-events-none"
-          />
-        </figure>
-        <div className="flex flex-col justify-between items-center gap-10 z-0 absolute min-h-[500px]">
-          <div className="flex justify-center items-center gap-5">
-            <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-              Jan 2023
-            </p>
-            <p>&ndash;</p>
-            <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-              GEITS
-            </p>
+            <hr className={project.gradient} />
           </div>
-
-          <h2
-            className={clsx(
-              stardom.className,
-              "text-[clamp(46px,11vw,50px)] text-center max-w-xs"
-            )}
+          <figure
+            ref={projectRefs.current[index].right as LegacyRef<HTMLElement>}
+            className="bg-pink-200 w-[80vw] h-[100vw] md:w-[50vw] md:max-w-2xl md:h-[45vw] rounded-3xl"
           >
-            GEITS UI/UX and development.
-          </h2>
-
-          <hr className="w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#7ef29d] to-[#0f68a9] border-none" />
-        </div>
-        <figure
-          ref={rightGeits}
-          className="bg-pink-200 w-[80vw] h-[100vw] md:w-[50vw] md:max-w-2xl md:h-[45vw] rounded-3xl"
-        >
-          <Image
-            src="/assets/images/geits-right.png"
-            fill
-            alt="Campanario"
-            className="object-cover rounded-3xl pointer-events-none"
-          />
-        </figure>
-      </article>
+            <Image
+              src={project.src}
+              fill
+              alt={project.name}
+              className="object-cover rounded-3xl pointer-events-none"
+            />
+          </figure>
+        </article>
+      ))}
     </React.Fragment>
   );
 };
@@ -182,92 +155,53 @@ export const ShowCaseDesktop = () => {
 export const ShowCaseMobile = () => {
   return (
     <React.Fragment>
-      <ScrollReveal>
-        <article className="flex justify-center items-center gap-8">
-          <div className="flex flex-col justify-between items-center gap-10">
-            <div className="w-full flex justify-center items-center gap-5">
-              <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-                dec 2022
-              </p>
-              <p>&ndash;</p>
-              <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-                El Campanario Eventos.
-              </p>
+      <ScrollReveal className="flex flex-col gap-16">
+        {projects.map((project) => (
+          <article
+            className="flex justify-center items-center gap-8"
+            key={project.name}
+          >
+            <div className="flex flex-col justify-between items-center gap-10">
+              <div className="w-full flex justify-center items-center gap-5">
+                <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
+                  {project.date}
+                </p>
+                <p>&ndash;</p>
+                <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
+                  {project.subHeader}
+                </p>
+              </div>
+
+              <h2
+                className={clsx(
+                  stardom.className,
+                  "text-[clamp(46px,11vw,50px)] text-center",
+                )}
+              >
+                {project.name}
+              </h2>
+
+              <Chip
+                variant="flat"
+                color={project.color as any}
+                as="a"
+                href={project.href}
+                target="_blank"
+              >
+                Site
+              </Chip>
+              <figure className="relative bg-purple-200 w-[80vw] h-[100vw] rounded-xl">
+                <Image
+                  src={project.src}
+                  fill
+                  alt="Campanario"
+                  className="object-cover rounded-xl pointer-events-none"
+                />
+              </figure>
+              <hr className={project.gradient} />
             </div>
-
-            <h2
-              className={clsx(
-                stardom.className,
-                "text-[clamp(46px,11vw,50px)] text-center"
-              )}
-            >
-              Campanario Eventos.
-            </h2>
-
-            <Chip
-              variant="flat"
-              color="warning"
-              as="a"
-              href="https://instagram.com/xervsware"
-              target="_blank"
-            >
-              Site
-            </Chip>
-            <figure className="relative bg-purple-200 w-[80vw] h-[100vw] rounded-xl">
-              <Image
-                src="/assets/images/campanario-left.png"
-                fill
-                alt="Campanario"
-                className="object-cover rounded-3xl pointer-events-none"
-              />
-            </figure>
-            <hr className="w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#eeb86d] to-[#9946b2] border-none" />
-          </div>
-        </article>
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <article className="flex justify-center items-center gap-8 mt-56">
-          <div className="flex flex-col justify-between items-center gap-10">
-            <div className="flex justify-center items-center gap-5">
-              <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-                Jan 2023
-              </p>
-              <p>&ndash;</p>
-              <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
-                GEITS
-              </p>
-            </div>
-
-            <h2
-              className={clsx(
-                stardom.className,
-                "text-[clamp(46px,11vw,50px)] text-center max-w-xs"
-              )}
-            >
-              GEITS UI/UX and development.
-            </h2>
-            <Chip
-              variant="flat"
-              color="success"
-              as="a"
-              href="https://geits.tech"
-              target="_blank"
-            >
-              Site
-            </Chip>
-
-            <figure className="relative bg-purple-200 w-[80vw] h-[100vw] rounded-xl">
-              <Image
-                src="/assets/images/geits-left.png"
-                fill
-                alt="Campanario"
-                className="object-cover rounded-3xl pointer-events-none"
-              />
-            </figure>
-            <hr className="w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#7ef29d] to-[#0f68a9] border-none" />
-          </div>
-        </article>
+          </article>
+        ))}
       </ScrollReveal>
     </React.Fragment>
   );
