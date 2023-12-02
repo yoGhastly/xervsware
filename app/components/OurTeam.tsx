@@ -71,7 +71,7 @@ export const OurTeam = () => {
         {memberData.map((member, idx) => (
           <Link href={member.linkedIn} key={idx} className="flex gap-4">
             <Image
-              src="/assets/images/linkedin.svg"
+              src="/assets/images/linkedIn.svg"
               alt="LinkedIn"
               width={24}
               height={24}
