@@ -52,7 +52,7 @@ export const OurTeam = () => {
                   {name}
                 </p>
                 <p className="text-[clamp(16px,11vw,16px)] text-[#9A9B9D]">
-                  {title} -{" "}
+                  {title}
                 </p>
               </div>
 
