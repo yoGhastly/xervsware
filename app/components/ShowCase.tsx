@@ -48,7 +48,7 @@ const projects = [
     name: "Campanario Eventos.",
     src: "/assets/images/campanario-right.png",
     srcLeft: "/assets/images/campanario-left.png",
-    href: "#",
+    href: "https://campanario-eventos.vercel.app",
     color: "warning",
     gradient:
       "w-full h-5 rounded-3xl max-w-xs bg-gradient-to-r from-[#eeb86d] to-[#9946b2] border-none",
