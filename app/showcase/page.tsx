@@ -98,7 +98,7 @@ const ShowcaseComponent: React.FC = () => {
               href="https://cal.com/xervsware"
               target="_blank"
             >
-              Get Started
+              Book Virtual Session
             </Button>
           </div>
         </section>

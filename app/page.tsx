@@ -63,7 +63,7 @@ export default function Home() {
           href="https://cal.com/xervsware"
           target="_blank"
         >
-          Get Started
+          Book Virtual Session
         </Button>
       </header>
 
