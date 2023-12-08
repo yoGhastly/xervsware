@@ -39,7 +39,7 @@ export const Navbar = () => {
             variant="ghost"
             className="text-white hover:text-black"
           >
-            Book Virual Session
+            Book Virtual Session
           </Button>
         </NavbarItem>
       </NavbarContent>
