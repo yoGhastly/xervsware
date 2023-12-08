@@ -74,7 +74,7 @@ const ShowcaseComponent: React.FC = () => {
           {!isSm ? <ShowCaseDesktop /> : <ShowCaseMobile />}
 
           <div className="flex flex-col justify-center md:items-center w-full gap-16 h-96">
-            <p className="uppercase">get in touch</p>
+            <p className="uppercase text-white">get in touch</p>
             <Popover placement="bottom" color="success" isOpen={copied}>
               <PopoverTrigger onClick={copyToClipboard}>
                 <h3
