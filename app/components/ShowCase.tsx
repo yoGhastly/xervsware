@@ -116,7 +116,7 @@ export const ShowCaseDesktop = () => {
               <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
                 {project.date}
               </p>
-              <p>&ndash;</p>
+              <p className="text-white">&ndash;</p>
               <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
                 {project.name}
               </p>
@@ -127,7 +127,7 @@ export const ShowCaseDesktop = () => {
               target="_blank"
               className={clsx(
                 stardom.className,
-                "text-[clamp(46px,11vw,50px)] text-center",
+                "text-[clamp(46px,11vw,50px)] text-center text-white",
               )}
             >
               {project.name}
@@ -166,7 +166,7 @@ export const ShowCaseMobile = () => {
                 <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
                   {project.date}
                 </p>
-                <p>&ndash;</p>
+                <p className="text-white">&ndash;</p>
                 <p className="uppercase text-white text-[clamp(16px,11vw,16px)]">
                   {project.subHeader}
                 </p>
@@ -175,7 +175,7 @@ export const ShowCaseMobile = () => {
               <h2
                 className={clsx(
                   stardom.className,
-                  "text-[clamp(46px,11vw,50px)] text-center",
+                  "text-[clamp(46px,11vw,50px)] text-center text-white",
                 )}
               >
                 {project.name}

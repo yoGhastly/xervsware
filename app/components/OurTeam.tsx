@@ -23,7 +23,7 @@ const memberData = [
 export const OurTeam = () => {
   return (
     <section className="bg-[#080808] max-w-xs md:max-w-3xl p-8 md:p-16 flex flex-col gap-8 rounded-md">
-      <h1 className="self-start font-bold text-xl md:text-[clamp(46px,11vw,46px)] ">
+      <h1 className="text-[#e0e0e0] self-start font-bold text-xl md:text-[clamp(46px,11vw,46px)] ">
         Our Team
       </h1>
       <p className="text-[#9A9B9D] self-start w-full">

@@ -61,7 +61,7 @@ const ShowcaseComponent: React.FC = () => {
               )}
             />
             <RevealElement>
-              <p className="text-center">
+              <p className="text-center text-white">
                 Explore our impressive portfolio showcasing the pinnacle of our
                 expertise in software development and cutting-edge UI/UX design.
                 Immerse yourself in the innovative solutions we&apos;ve crafted
@@ -80,7 +80,7 @@ const ShowcaseComponent: React.FC = () => {
                 <h3
                   className={clsx(
                     stardom.className,
-                    "text-2xl md:text-[clamp(60px,11vw,60px)] cursor-pointer",
+                    "text-2xl md:text-[clamp(60px,11vw,60px)] cursor-pointer text-white",
                   )}
                 >
                   info@xervsware.com
@@ -88,7 +88,7 @@ const ShowcaseComponent: React.FC = () => {
               </PopoverTrigger>
 
               <PopoverContent>
-                <p>Copied to Clipboard</p>
+                <p className="text-[#e0e0e0]">Copied to Clipboard</p>
               </PopoverContent>
             </Popover>
             <Button

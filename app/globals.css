@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 255, 255, 255;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 255, 255, 255;
@@ -16,6 +23,6 @@ body {
   background: #010101;
 }
 nav {
- background-color: transparent;
- background: transparent;
+  background-color: transparent;
+  background: transparent;
 }
